@@ -1,0 +1,91 @@
+---
+title: "Initial Benchmark Framework"
+output: html_notebook
+---
+
+
+```{r setup}
+source("project_settings.R")
+source("functions.R")
+
+```
+
+# 1000G benchmarks
+
+```{r fig.height=11,fig.width=8.5}
+
+do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/00df1a40-9f69-475f-a952-dc7859c9f076/run_GEM/52ae7ca0-9932-40eb-96c1-cdabbc8e5e88/call-run_tests",
+         cpus=2,
+         disk="25G",
+         memory="30G",
+         maf=0.005,
+         stream_snps="NA (default)",
+         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 23, 4:16 PM")
+```
+
+
+# UK Biobank - chromosome 22 - subset 10K
+
+## Stream SNPs: 40
+https://app.terra.bio/#workspaces/largescale-gxe-implementation/ukb_gene_diet/job_history/03225dc7-2579-4a31-a3b0-6a114e20d90f
+https://job-manager.dsde-prod.broadinstitute.org/jobs/0265bc89-0f70-41c6-a800-d9fd5b255882
+```{r fig.height=11,fig.width=8.5}
+
+do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/03225dc7-2579-4a31-a3b0-6a114e20d90f/run_GEM/0265bc89-0f70-41c6-a800-d9fd5b255882/call-run_tests",
+         cpus=8,
+         disk="25G",
+         memory="50G",
+         maf=0.005,
+         stream_snps=40,
+         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps\nSubmitted:Dec 23, 2019, 4:36 PM")
+
+```
+
+## Stream SNPs: 200
+https://app.terra.bio/#workspaces/largescale-gxe-implementation/ukb_gene_diet/job_history/03225dc7-2579-4a31-a3b0-6a114e20d90f
+https://job-manager.dsde-prod.broadinstitute.org/jobs/fe6a1f5b-b727-47c2-80b1-eba1fd1ee529
+```{r fig.height=11,fig.width=8.5}
+
+do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/03225dc7-2579-4a31-a3b0-6a114e20d90f/run_GEM/fe6a1f5b-b727-47c2-80b1-eba1fd1ee529/call-run_tests",
+         cpus=8,
+         disk="25G",
+         memory="50G",
+         maf=0.005,
+         stream_snps=200,
+         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps\nSubmitted:Dec 23, 2019, 4:36 PM")
+
+```
+
+# UK Biobank - chromosome 22 
+## Stream SNPs: 200
+https://app.terra.bio/#workspaces/largescale-gxe-implementation/ukb_gene_diet/job_history/14905b3a-4c32-467f-a435-43b285e74628
+https://job-manager.dsde-prod.broadinstitute.org/jobs/d9a741c3-6d10-4716-a733-43f3f94a9cb7
+```{r fig.height=11,fig.width=8.5}
+
+do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/14905b3a-4c32-467f-a435-43b285e74628/run_GEM/d9a741c3-6d10-4716-a733-43f3f94a9cb7/call-run_tests",
+         cpus=32,
+         disk="50G",
+         memory="60G",
+         maf=0.005,
+         stream_snps=200,
+         run_tests_runtime="6h 11m",
+         plot_description="UK Biobank Chr22\nlargescale-gxe-implementation/ukb_gene_diet\nTest: Stream_200\nSubmitted:Dec 23, 2019, 5:19 PM")
+
+```
+
+
+## Stream SNPs: 200 - Increased Memory
+https://app.terra.bio/#workspaces/largescale-gxe-implementation/ukb_gene_diet/job_history/15023ed0-ac28-4e7d-b32a-3f93810b6164
+https://job-manager.dsde-prod.broadinstitute.org/jobs/35babd3d-8b0a-4d5a-9068-2c2c50f6590a
+```{r fig.height=11,fig.width=8.5}
+
+do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/15023ed0-ac28-4e7d-b32a-3f93810b6164/run_GEM/35babd3d-8b0a-4d5a-9068-2c2c50f6590a/call-run_tests",
+         cpus=32,
+         disk="50G",
+         memory="60G",
+         maf=0.005,
+         stream_snps=200,
+         run_tests_runtime="6h 11m",
+         plot_description="UK Biobank Chr22\nlargescale-gxe-implementation/ukb_gene_diet\nTest: Stream_200, 60GB memory\nSubmitted:Dec 23, 2019, 5:19 PM")
+
+```
