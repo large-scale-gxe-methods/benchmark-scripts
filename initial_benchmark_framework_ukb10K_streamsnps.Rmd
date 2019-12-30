@@ -1,0 +1,173 @@
+---
+title: "Initial Benchmark Framework"
+output: 
+  html_notebook:
+    toc: true
+---
+
+
+```{r setup}
+source("project_settings.R")
+source("functions.R")
+
+```
+
+December 28, 2019
+https://github.com/large-scale-gxe-methods/gem-workflow/blob/master/gem_workflow.wdl
+
+
+# Current WDL
+
+Note, in google cloud, the size of the local-disk is ignored. 'local-disk' is the best option for I/O intensive applications.
+
+```
+task run_tests {
+
+	File genofile
+	Float? maf = 0.001
+	File? samplefile
+	File phenofile
+	String sample_id_header
+	String outcome
+	Boolean binary_outcome
+	String covar_headers
+	String int_covar_num
+	String? delimiter = ","
+	String? missing = "NaN"
+	Boolean robust
+	Int? stream_snps = 20
+	Float? tol = 0.000001
+	Int? memory = 10
+	Int? cpu = 4
+	Int? disk = 20
+
+	String pheno = if binary_outcome then "1" else "0"
+	String robust01 = if robust then "1" else "0"
+
+	command {
+		echo -e "SAMPLE_ID_HEADER\n${sample_id_header}\n"\
+			"PHENOTYPE\n${pheno}\n"\
+			"PHENO_HEADER\n${outcome}\n"\
+			"COVARIATES_HEADERS\n${covar_headers}\n"\
+			"MISSING\n${missing}\n"\
+			"ROBUST\n${robust01}\n"\
+			"STREAM_SNPS\n${stream_snps}\n"\
+			"NUM_OF_INTER_COVARIATE\n${int_covar_num}\n"\
+			"LOGISTIC_CONVERG_TOL\n${tol}\n"\
+			"DELIMINATOR\n${delimiter}\n"\
+			"GENO_FILE_PATH\n${genofile}\n"\
+			"PHENO_FILE_PATH\n${phenofile}\n"\
+			"SAMPLE_FILE_PATH\n${samplefile}\n"\
+			"OUTPUT_PATH\ngem_res"\
+			> GEM_Input.param
+
+		echo "" > resource_usage.log
+		dstat -c -d -m --nocolor 10 1>>resource_usage.log &
+		/GEM/GEM -param GEM_Input.param -maf ${maf}
+	}
+
+	runtime {
+		docker: "quay.io/large-scale-gxe-methods/gem-workflow"
+		memory: "${memory} GB"
+		cpu: "${cpu}"
+		disks: "local-disk ${disk} HDD"
+	}
+
+	output {
+		File param_file = "GEM_Input.param"
+		File out = "gem_res"
+		File resource_usage = "resource_usage.log"
+	}
+}
+```
+
+# UK Biobank - chromosome 22 - subset 10K
+
+https://app.terra.bio/#workspaces/largescale-gxe-implementation/ukb_gene_diet/job_history/09122736-c836-4add-9e6f-b1e20887dd4b
+
+## Stream SNPs: 20
+https://job-manager.dsde-prod.broadinstitute.org/jobs/9e273f41-4163-4b51-abf7-1de03a03ad5b
+```
+****************************************************************************
+Starting GWAS.
+Streaming SNPs for speeding up GWAS analysis in parallel.
+Number of SNPs in each batch is: 20
+*********************************************************
+Total Wall Time = 259.916 Seconds
+Total CPU Time = 530.214 Seconds
+Execution Wall Time = 41.0762 Seconds
+*********************************************************
+```
+
+```{r fig.height=8,fig.width=6}
+
+do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/09122736-c836-4add-9e6f-b1e20887dd4b/run_GEM/9e273f41-4163-4b51-abf7-1de03a03ad5b/call-run_tests",
+         cpus=8,
+         disk="25G",
+         memory="16G",
+         maf=0.005,
+         stream_snps=20,
+         run_tests_runtime="0h 7m",
+         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps\nSubmitted:Dec 30, 2019, 5:20 PM")
+
+```
+
+## Stream SNPs: 100
+https://job-manager.dsde-prod.broadinstitute.org/jobs/c93d16a0-6806-4ac9-8bfa-c273ddd36595
+```
+****************************************************************************
+Starting GWAS.
+Streaming SNPs for speeding up GWAS analysis in parallel.
+Number of SNPs in each batch is: 100
+*********************************************************
+Total Wall Time = 265.331 Seconds
+Total CPU Time = 547.377 Seconds
+Execution Wall Time = 45.17 Seconds
+*********************************************************
+```
+
+```{r fig.height=8,fig.width=6}
+
+do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/09122736-c836-4add-9e6f-b1e20887dd4b/run_GEM/c93d16a0-6806-4ac9-8bfa-c273ddd36595/call-run_tests",
+         cpus=8,
+         disk="25G",
+         memory="16G",
+         maf=0.005,
+         stream_snps=100,
+         run_tests_runtime="0h 8m",
+         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps\nSubmitted:Dec 30, 2019, 5:20 PM")
+
+```
+
+## Stream SNPs: 200
+https://job-manager.dsde-prod.broadinstitute.org/jobs/f885d047-526d-4976-a672-a088285cf12d
+
+```
+****************************************************************************
+Starting GWAS.
+Streaming SNPs for speeding up GWAS analysis in parallel.
+Number of SNPs in each batch is: 200
+*********************************************************
+Total Wall Time = 285.098 Seconds
+Total CPU Time = 616.202 Seconds
+Execution Wall Time = 58.2076 Seconds
+*********************************************************
+```
+
+```{r fig.height=8,fig.width=6}
+
+do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/09122736-c836-4add-9e6f-b1e20887dd4b/run_GEM/f885d047-526d-4976-a672-a088285cf12d/call-run_tests",
+         cpus=8,
+         disk="25G",
+         memory="16G",
+         maf=0.005,
+         stream_snps=200,
+         run_tests_runtime="0h 9m",
+         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps\nSubmitted:Dec 30, 2019, 5:20 PM")
+
+```
+
+
+
+
+

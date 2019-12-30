@@ -82,16 +82,16 @@ plot_log_file_data <- function(parameters_table,log_table,plot_description) {
   library(gridExtra)
   library(gdata)
   
-  main_title <- textGrob(plot_description,gp=gpar(fontsize=12))
+  main_title <- textGrob(plot_description,gp=gpar(fontsize=8))
   cpu_plot <- make_cpu_plot(log_table[,1:5])
   dsk_plot <- make_dsk_plot(log_table[,6:7])
   mem_plot <- make_mem_plot(log_table[,8:11])
 
   grid.arrange(main_title,
-                tableGrob(parameters_table,theme=ttheme_default(base_size = 8)),
+                tableGrob(parameters_table,theme=ttheme_default(base_size = 6)),
                 cpu_plot,
                 dsk_plot,
-                mem_plot, nrow=5)
+                mem_plot,layout_matrix=matrix(c(1,2,3,3,4,4,5,5),ncol=2,nrow=4,byrow = TRUE))
   
 }
 
