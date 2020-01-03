@@ -83,205 +83,237 @@ task run_tests {
 
 # 1000G benchmarks
 
-## default; 2 cpus
-
-```{r fig.height=8,fig.width=4}
-
-do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/00df1a40-9f69-475f-a952-dc7859c9f076/run_GEM/52ae7ca0-9932-40eb-96c1-cdabbc8e5e88/call-run_tests",
-         cpus=2,
-         disk="25G",
-         memory="30G",
-         maf=0.005,
-         stream_snps="NA (default)",
-         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 23, 4:16 PM")
-```
-
-## cpus 2 - 8; stream_snps 20 - 2000
+## cpus 2 - 8; stream_snps 20 - 2000 (Chromosome 2)
 
 https://app.terra.bio/#workspaces/largescale-gxe-methods/GEM-showcase/job_history/60487ecf-3f8b-4654-a17d-4bc1bead4685
 
 ### cpu 2; stream_snps 20
 
-```{r fig.height=8,fig.width=4}
+```{r}
+if(!file.exists("benchmark1000G.RData")) {
+  benchmark1000G <- NA
+  benchmark1000G_4 <- NA
+  benchmark1000G_2 <- NA
+  benchmark1000G_3 <- NA
+  benchmark1000G_5 <- NA
+  benchmark1000G_5_1 <- NA
+  benchmark1000G_6 <- NA
+  benchmark1000G_7 <- NA
+  benchmark1000G_8 <- NA
+  benchmark1000G_8_1 <- NA
+  benchmark1000G_9 <- NA
+benchmark1000G_10 <- NA
 
-do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/2fceb9a5-260c-4350-877e-cddc555c8858/call-run_tests",
+} else {
+  load("benchmark1000G.RData")
+}
+```
+
+
+
+
+```{r  fig.height=5,fig.width=12}
+
+benchmark1000G <- do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/2fceb9a5-260c-4350-877e-cddc555c8858/call-run_tests",
          cpus=2,
          disk="25G",
          memory="15G",
          maf=0.005,
          stream_snps="20",
          run_tests_runtime="0h 9m",
-         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM")
+         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM",plot_data = benchmark1000G,chr="chr2_")
 ```
 
 ### cpu 2; stream_snps 100
 
-```{r fig.height=8,fig.width=4}
+```{r  fig.height=5,fig.width=12}
 
-do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/499eb476-637f-4d00-82f7-ffbe00f3bc2d/call-run_tests",
+benchmark1000G_2 <- do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/499eb476-637f-4d00-82f7-ffbe00f3bc2d/call-run_tests",
          cpus=2,
          disk="25G",
          memory="15G",
          maf=0.005,
          stream_snps="100",
          run_tests_runtime="0h 11m",
-         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM")
+         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM",plot_data = benchmark1000G_2,chr="chr2_")
 ```
 
 
 ### cpu 2; stream_snps 200
 
-```{r fig.height=8,fig.width=4}
 
-do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/9fea2a53-7f09-4530-8e3d-b03490f14924/call-run_tests",
+
+```{r  fig.height=5,fig.width=12}
+
+benchmark1000G_3 <- do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/9fea2a53-7f09-4530-8e3d-b03490f14924/call-run_tests",
          cpus=2,
          disk="25G",
          memory="15G",
          maf=0.005,
          stream_snps="200",
          run_tests_runtime="0h 11m",
-         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM")
+         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM",plot_data = benchmark1000G_3,chr="chr2_")
 ```
 
 ### cpu 2; stream_snps 1000
 
-```{r fig.height=8,fig.width=4}
 
-do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/3281f361-ae77-4e6c-801f-2e5d0daa56e0/call-run_tests",
+```{r  fig.height=5,fig.width=12}
+
+benchmark1000G_4 <- do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/3281f361-ae77-4e6c-801f-2e5d0daa56e0/call-run_tests",
          cpus=2,
          disk="25G",
          memory="15G",
          maf=0.005,
          stream_snps="1000",
          run_tests_runtime="0h 25m",
-         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM")
+         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM",plot_data = benchmark1000G_4,chr="chr2_")
 ```
 
 
 
 ### cpu 4; stream_snps 20
 
-```{r fig.height=8,fig.width=4}
 
-do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/235b2c99-58d9-4c8b-8cc0-89a91eaa1717/call-run_tests",
+```{r  fig.height=5,fig.width=12}
+
+benchmark1000G_5 <- do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/235b2c99-58d9-4c8b-8cc0-89a91eaa1717/call-run_tests",
          cpus=4,
          disk="25G",
          memory="15G",
          maf=0.005,
          stream_snps="20",
          run_tests_runtime="0h 9m",
-         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM")
+         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM",plot_data = benchmark1000G_5,chr="chr2_")
 ```
 
 ### cpu 4; stream_snps 100
 
-```{r fig.height=8,fig.width=4}
+```{r  fig.height=5,fig.width=12}
 
-do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/204a4ae0-d8dc-47a5-a208-24eafa4eaca6/call-run_tests",
+benchmark1000G_5_1 <- do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/204a4ae0-d8dc-47a5-a208-24eafa4eaca6/call-run_tests",
          cpus=4,
          disk="25G",
          memory="15G",
          maf=0.005,
          stream_snps="100",
          run_tests_runtime="0h 10m",
-         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM")
+         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM",plot_data = benchmark1000G_5_1,chr="chr2_")
 ```
 
 
 ### cpu 4; stream_snps 200
 
-```{r fig.height=8,fig.width=4}
 
-do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/ecf63837-8057-4b15-b8ee-f10727d3c43a/call-run_tests",
+
+```{r  fig.height=5,fig.width=12}
+
+benchmark1000G_6 <- do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/ecf63837-8057-4b15-b8ee-f10727d3c43a/call-run_tests",
          cpus=4,
          disk="25G",
          memory="15G",
          maf=0.005,
          stream_snps="200",
          run_tests_runtime="0h 12m",
-         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM")
+         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM",plot_data = benchmark1000G_6,chr="chr2_")
 ```
 
 ### cpu 4; stream_snps 1000
 
-```{r fig.height=8,fig.width=4}
 
-do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/711e6f86-e98b-4250-ba9e-eb404faeae43/call-run_tests",
+
+```{r  fig.height=5,fig.width=12}
+
+benchmark1000G_7 <- do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/711e6f86-e98b-4250-ba9e-eb404faeae43/call-run_tests",
          cpus=4,
          disk="25G",
          memory="15G",
          maf=0.005,
          stream_snps="1000",
          run_tests_runtime="0h 28m",
-         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM")
+         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM",plot_data = benchmark1000G_7,chr="chr2_")
 ```
 
 
 ### cpu 8; stream_snps 20
 
-```{r fig.height=8,fig.width=4}
 
-do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/fa0083f9-b3a9-4209-a666-394c0cbeef31/call-run_tests",
+
+
+```{r  fig.height=5,fig.width=12}
+
+benchmark1000G_8 <- do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/fa0083f9-b3a9-4209-a666-394c0cbeef31/call-run_tests",
          cpus=8,
          disk="25G",
          memory="15G",
          maf=0.005,
          stream_snps="20",
          run_tests_runtime="0h 9m",
-         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM")
+         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM",plot_data = benchmark1000G_8,chr="chr2_")
 ```
 
 ### cpu 8; stream_snps 100
 
-```{r fig.height=8,fig.width=4}
 
-do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/6293ea50-69e6-4610-a9e5-db3f667b0946/call-run_tests",
+```{r  fig.height=5,fig.width=12}
+
+benchmark1000G_8_1 <- do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/6293ea50-69e6-4610-a9e5-db3f667b0946/call-run_tests",
          cpus=8,
          disk="25G",
          memory="15G",
          maf=0.005,
          stream_snps="100",
          run_tests_runtime="0h 11m",
-         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM")
+         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM",plot_data = benchmark1000G_8_1,chr="chr2_")
 ```
 
 
 ### cpu 8; stream_snps 200
 
-```{r fig.height=8,fig.width=4}
 
-do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/e8130931-c5e3-4126-8a9a-02b69da28251/call-run_tests",
+
+```{r  fig.height=5,fig.width=12}
+
+benchmark1000G_9 <- do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/e8130931-c5e3-4126-8a9a-02b69da28251/call-run_tests",
          cpus=8,
          disk="25G",
          memory="15G",
          maf=0.005,
          stream_snps="200",
          run_tests_runtime="0h 10m",
-         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM")
+         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM",plot_data = benchmark1000G_9,chr="chr2_")
 ```
 
 ### cpu 8; stream_snps 1000
 
-```{r fig.height=8,fig.width=4}
 
-do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/f539cfe0-236e-4afe-8ff9-acc5cbaf87db/call-run_tests",
+```{r  fig.height=5,fig.width=12}
+
+benchmark1000G_10 <- do_plots(path_to_workflow = "gs://fc-5fe875e4-6194-4747-8b9d-c2e459422651/60487ecf-3f8b-4654-a17d-4bc1bead4685/run_GEM/f539cfe0-236e-4afe-8ff9-acc5cbaf87db/call-run_tests",
          cpus=8,
          disk="25G",
          memory="15G",
          maf=0.005,
          stream_snps="1000",
          run_tests_runtime="0h 19m",
-         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM")
+         plot_description="1000G simulated data\nGEM Showcase\nSubmitted: Dec 30, 1:52 PM",plot_data = benchmark1000G_10,chr="chr2_")
 ```
+
+
+```{r}
+save(list=ls()[grep(pattern="benchmark",ls())],file="benchmark1000G.RData")
+
+```
+
 
 # UK Biobank - chromosome 22 - subset 10K
 
 ## Stream SNPs: 40
 https://app.terra.bio/#workspaces/largescale-gxe-implementation/ukb_gene_diet/job_history/03225dc7-2579-4a31-a3b0-6a114e20d90f
 https://job-manager.dsde-prod.broadinstitute.org/jobs/0265bc89-0f70-41c6-a800-d9fd5b255882
-```{r fig.height=8,fig.width=6}
+```{r  fig.height=5,fig.width=12}
 
-do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/03225dc7-2579-4a31-a3b0-6a114e20d90f/run_GEM/0265bc89-0f70-41c6-a800-d9fd5b255882/call-run_tests",
+benchmark_ukb10k_1 <- do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/03225dc7-2579-4a31-a3b0-6a114e20d90f/run_GEM/0265bc89-0f70-41c6-a800-d9fd5b255882/call-run_tests",
          cpus=8,
          disk="25G",
          memory="50G",
@@ -294,9 +326,9 @@ do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc
 ## Stream SNPs: 200
 https://app.terra.bio/#workspaces/largescale-gxe-implementation/ukb_gene_diet/job_history/03225dc7-2579-4a31-a3b0-6a114e20d90f
 https://job-manager.dsde-prod.broadinstitute.org/jobs/fe6a1f5b-b727-47c2-80b1-eba1fd1ee529
-```{r fig.height=8,fig.width=6}
+```{r  fig.height=5,fig.width=12}
 
-do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/03225dc7-2579-4a31-a3b0-6a114e20d90f/run_GEM/fe6a1f5b-b727-47c2-80b1-eba1fd1ee529/call-run_tests",
+benchmark_ukb10k_2 <- do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/03225dc7-2579-4a31-a3b0-6a114e20d90f/run_GEM/fe6a1f5b-b727-47c2-80b1-eba1fd1ee529/call-run_tests",
          cpus=8,
          disk="25G",
          memory="50G",
@@ -310,9 +342,9 @@ do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc
 ## Stream SNPs: 200
 https://app.terra.bio/#workspaces/largescale-gxe-implementation/ukb_gene_diet/job_history/14905b3a-4c32-467f-a435-43b285e74628
 https://job-manager.dsde-prod.broadinstitute.org/jobs/d9a741c3-6d10-4716-a733-43f3f94a9cb7
-```{r fig.height=8,fig.width=6}
+```{r  fig.height=5,fig.width=12}
 
-do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/14905b3a-4c32-467f-a435-43b285e74628/run_GEM/d9a741c3-6d10-4716-a733-43f3f94a9cb7/call-run_tests",
+benchmark_ukb_1 <- do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/14905b3a-4c32-467f-a435-43b285e74628/run_GEM/d9a741c3-6d10-4716-a733-43f3f94a9cb7/call-run_tests",
          cpus=32,
          disk="50G",
          memory="25G",
@@ -327,9 +359,9 @@ do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc
 ## Stream SNPs: 200 - Increased Memory
 https://app.terra.bio/#workspaces/largescale-gxe-implementation/ukb_gene_diet/job_history/15023ed0-ac28-4e7d-b32a-3f93810b6164
 https://job-manager.dsde-prod.broadinstitute.org/jobs/35babd3d-8b0a-4d5a-9068-2c2c50f6590a
-```{r fig.height=8,fig.width=6}
+```{r  fig.height=5,fig.width=12}
 
-do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/15023ed0-ac28-4e7d-b32a-3f93810b6164/run_GEM/35babd3d-8b0a-4d5a-9068-2c2c50f6590a/call-run_tests",
+benchmark_ukb_2 <- do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/15023ed0-ac28-4e7d-b32a-3f93810b6164/run_GEM/35babd3d-8b0a-4d5a-9068-2c2c50f6590a/call-run_tests",
          cpus=32,
          disk="50G",
          memory="60G",

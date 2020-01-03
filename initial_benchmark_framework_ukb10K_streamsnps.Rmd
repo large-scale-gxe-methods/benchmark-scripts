@@ -12,6 +12,12 @@ source("functions.R")
 
 ```
 
+```{r}
+stream_snps_20 <- NA
+stream_snps_100 <- NA
+stream_snps_200 <- NA
+```
+
 December 28, 2019
 https://github.com/large-scale-gxe-methods/gem-workflow/blob/master/gem_workflow.wdl
 
@@ -99,16 +105,16 @@ Execution Wall Time = 41.0762 Seconds
 *********************************************************
 ```
 
-```{r fig.height=8,fig.width=6}
+```{r  fig.height=8,fig.width=10}
 
-do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/09122736-c836-4add-9e6f-b1e20887dd4b/run_GEM/9e273f41-4163-4b51-abf7-1de03a03ad5b/call-run_tests",
+stream_snps_20 <- do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/09122736-c836-4add-9e6f-b1e20887dd4b/run_GEM/9e273f41-4163-4b51-abf7-1de03a03ad5b/call-run_tests",
          cpus=8,
          disk="25G",
          memory="16G",
          maf=0.005,
          stream_snps=20,
          run_tests_runtime="0h 7m",
-         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps\nSubmitted:Dec 30, 2019, 5:20 PM")
+         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps\nSubmitted:Dec 30, 2019, 5:20 PM",plot_data=stream_snps_20)
 
 ```
 
@@ -126,16 +132,16 @@ Execution Wall Time = 45.17 Seconds
 *********************************************************
 ```
 
-```{r fig.height=8,fig.width=6}
+```{r  fig.height=8,fig.width=10}
 
-do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/09122736-c836-4add-9e6f-b1e20887dd4b/run_GEM/c93d16a0-6806-4ac9-8bfa-c273ddd36595/call-run_tests",
+stream_snps_100 <- do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/09122736-c836-4add-9e6f-b1e20887dd4b/run_GEM/c93d16a0-6806-4ac9-8bfa-c273ddd36595/call-run_tests",
          cpus=8,
          disk="25G",
          memory="16G",
          maf=0.005,
          stream_snps=100,
          run_tests_runtime="0h 8m",
-         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps\nSubmitted:Dec 30, 2019, 5:20 PM")
+         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps\nSubmitted:Dec 30, 2019, 5:20 PM",plot_data = stream_snps_100)
 
 ```
 
@@ -154,20 +160,94 @@ Execution Wall Time = 58.2076 Seconds
 *********************************************************
 ```
 
-```{r fig.height=8,fig.width=6}
+```{r  fig.height=8,fig.width=10}
 
-do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/09122736-c836-4add-9e6f-b1e20887dd4b/run_GEM/f885d047-526d-4976-a672-a088285cf12d/call-run_tests",
+stream_snps_200 <- do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/09122736-c836-4add-9e6f-b1e20887dd4b/run_GEM/f885d047-526d-4976-a672-a088285cf12d/call-run_tests",
          cpus=8,
          disk="25G",
          memory="16G",
          maf=0.005,
          stream_snps=200,
          run_tests_runtime="0h 9m",
-         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps\nSubmitted:Dec 30, 2019, 5:20 PM")
+         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps\nSubmitted:Dec 30, 2019, 5:20 PM",plot_data = stream_snps_200)
 
 ```
 
 
+# Explore the performance impact of covariates
+
+```{r}
+stream_20_5PCs <- NA
+stream_20_noPCs <- NA
+stream_100_5PCs <- NA
+stream_100_noPCs <- NA
+```
+
+## Stream 20, 5 PCs
+
+https://job-manager.dsde-prod.broadinstitute.org/jobs/ad25d213-e3ae-447e-ac5f-9854b8e66d50
+```{r  fig.height=8,fig.width=10}
+stream_20_5PCs <- do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/d45966a9-b909-4935-b0ab-7b68cbae55f8/run_GEM/ad25d213-e3ae-447e-ac5f-9854b8e66d50/call-run_tests",
+         cpus=8,
+         disk="25G",
+         memory="16G",
+         maf=0.005,
+         stream_snps=20,
+         run_tests_runtime="0h 10m",
+         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps & covariates\nSubmitted:January 2, 2020, 1:43 PM",plot_data=stream_20_5PCs)
 
 
+```
 
+## Stream 20 No PCs
+
+https://job-manager.dsde-prod.broadinstitute.org/jobs/3834fecb-b154-457b-a1d7-21f8199103bb
+```{r  fig.height=8,fig.width=10}
+stream_20_noPCs <- do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/d45966a9-b909-4935-b0ab-7b68cbae55f8/run_GEM/3834fecb-b154-457b-a1d7-21f8199103bb/call-run_tests",
+         cpus=8,
+         disk="25G",
+         memory="16G",
+         maf=0.005,
+         stream_snps=20,
+         run_tests_runtime="0h 6m",
+         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps & covariates\nSubmitted:January 2, 2020, 1:43 PM",plot_data=stream_20_noPCs)
+
+
+```
+
+## Stream 100 5 PCs
+
+https://job-manager.dsde-prod.broadinstitute.org/jobs/f13761d8-78ce-41c3-b922-776049cabfc5
+```{r  fig.height=8,fig.width=10}
+stream_100_5PCs <- do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/d45966a9-b909-4935-b0ab-7b68cbae55f8/run_GEM/f13761d8-78ce-41c3-b922-776049cabfc5/call-run_tests",
+         cpus=8,
+         disk="25G",
+         memory="16G",
+         maf=0.005,
+         stream_snps=100,
+         run_tests_runtime="0h 7m",
+         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps & covariates\nSubmitted:January 2, 2020, 1:43 PM",plot_data=stream_100_5PCs)
+
+
+```
+
+## Stream 100 No PCs
+
+https://job-manager.dsde-prod.broadinstitute.org/jobs/04453f06-d4c9-4ad1-ad7e-a800bbbf166e
+```{r  fig.height=8,fig.width=10}
+stream_100_noPCs <- do_plots(path_to_workflow = "gs://fc-secure-006196ce-f92c-4096-80cf-80a7277524dc/d45966a9-b909-4935-b0ab-7b68cbae55f8/run_GEM/04453f06-d4c9-4ad1-ad7e-a800bbbf166e/call-run_tests",
+         cpus=8,
+         disk="25G",
+         memory="16G",
+         maf=0.005,
+         stream_snps=100,
+         run_tests_runtime="0h 8m",
+         plot_description="UK Biobank Chr22 - subset 10K\nlargescale-gxe-implementation/ukb_gene_diet\nExploring stream_snps & covariates\nSubmitted:January 2, 2020, 1:43 PM",plot_data=stream_100_noPCs)
+
+
+```
+
+
+```{r}
+save(stream_snps_20,stream_snps_100,stream_snps_200, stream_20_5PCs,stream_20_noPCs,stream_100_5PCs,stream_100_noPCs, file="initial_benchmark_framework_ukb10K_streamsnps.RData")
+```
