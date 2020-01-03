@@ -71,3 +71,17 @@ get_terra_log_files  <- function(file_path) {
 
   return(log_file_data)
 }
+
+get_terra_time_data  <- function(file_path) {
+  ## input bgen is a parameter listed in GEM_Input.param file
+  stdout_files <- system(paste0("/Users/amanning/google-cloud-sdk/bin/gsutil ls -R ",file_path,"/shard-*/stdout"),intern = TRUE)
+  
+  stdout_file_content <- list()
+  
+  for(stdout_file in stdout_files) {
+    stdout_file_content[[stdout_file]] <- system(paste0("/Users/amanning/google-cloud-sdk/bin/gsutil cat ",stdout_file),intern=TRUE)
+    
+  }
+  
+  return(stdout_file_content)
+}
