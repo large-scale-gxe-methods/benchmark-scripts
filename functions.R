@@ -11,6 +11,7 @@ get_log_files <- get_terra_log_files
 # Converting G, M, k to a single unit
 # https://www.rdocumentation.org/packages/gdata/versions/2.18.0/topics/humanReadable
 # https://stackoverflow.com/questions/10910688/converting-kilobytes-megabytes-etc-to-bytes-in-r
+
 convb <- function(x){
   ptn <- "(\\d*(.\\d+)*)(.*)"
   num  <- as.numeric(sub(ptn, "\\1", x))
@@ -73,6 +74,7 @@ parameters = c("bgen file",
                "workflow disk size",
                "workflow memory",
                "workflow maf",
+               "workflow threads",
                "workflow stream_snps",
                "run_tests task duration")
 
@@ -98,20 +100,22 @@ plot_log_file_data <- function(parameters_table,log_table,plot_description) {
   grid.arrange(main_title,
 #  grid.newpage()
                 tableGrob(parameters_table[1:4,],rows=rownames(parameters_table)[1:4],theme=ttheme_default(base_size = 6)),
-                tableGrob(parameters_table[5:8,],rows=rownames(parameters_table)[5:8],theme=ttheme_default(base_size = 6)),
+                tableGrob(parameters_table[5:9,],rows=rownames(parameters_table)[5:9],theme=ttheme_default(base_size = 6)),
                 cpu_plot,
                 dsk_plot,
                 mem_plot,layout_matrix=matrix(c(1,1,1,1,1,1,1,1,2,4,5,6,3,4,5,6),ncol=4,nrow=4,byrow = FALSE))
   
 }
 
-do_plots <- function(path_to_workflow,cpus,disk,memory,maf,stream_snps,run_tests_runtime=NA,plot_description,plot_data=NA,chr=NA) {
+do_plots <- function(path_to_workflow, cpus,disk, memory, maf, threads,
+                     stream_snps, run_tests_runtime=NA, plot_description, 
+                     plot_data=NA, chr=NA) {
+  
   if(!is.na(plot_data)) {
     bgen_files_size = plot_data[["bgen_files_size"]]
     log_file_data = plot_data[["log_file_data"]]
     terra_time_data = plot_data[["terra_time_data"]]
   } else {
-    
     bgen_files_size <- get_bgen_files_size(path_to_workflow)
     log_file_data <- get_log_files(path_to_workflow)
     terra_time_data <- get_terra_time_data(path_to_workflow)
@@ -121,26 +125,27 @@ do_plots <- function(path_to_workflow,cpus,disk,memory,maf,stream_snps,run_tests
   if(!is.na(chr)) {
     chr.index <- grep(pattern=chr,bgen_files_size[,1],fixed=TRUE)
   } else {
-    chr.index <- seq(1,nrow(bgen_files_size))
+    chr.index <- seq(1, nrow(bgen_files_size))
   }
   
   for(i in chr.index) {
- #   print(i)
-#    print(bgen_files_size[i,])
-   parameter_values = c("bgen file"=basename(bgen_files_size[i,1]),
-                       "bgen size"=bgen_files_size[i,2],
-                       "workflow CPUs"=cpus,
-                       "workflow disk size"=disk,
-                       "workflow memory"=memory,
-                       "workflow maf"=maf,
-                       "workflow stream_snps"=stream_snps,
-                       "run_tests task duration"=run_tests_runtime)
- # print(parameter_values)
-  parameters_table <- matrix(parameter_values,ncol=1,dimnames = list(parameters,"values"))
-#  print(parameters_table)
-  plot_log_file_data(parameters_table=parameters_table,
-                     log_table=log_file_data[[i]],
-                     plot_description=paste(plot_description,paste(terra_time_data[[i]],collapse="\n"),sep="\n\n"))
+    #   print(i)
+    #    print(bgen_files_size[i,])
+    parameter_values = c("bgen file"=basename(bgen_files_size[i, 1]),
+                         "bgen size"=bgen_files_size[i, 2],
+                         "workflow CPUs"=cpus,
+                         "workflow disk size"=disk,
+                         "workflow memory"=memory,
+                         "workflow maf"=maf,
+                         "workflow threads"=threads,
+                         "workflow stream_snps"=stream_snps,
+                         "run_tests task duration"=run_tests_runtime)
+    # print(parameter_values)
+    parameters_table <- matrix(parameter_values, ncol=1, dimnames=list(parameters, "values"))
+    #  print(parameters_table)
+    plot_log_file_data(parameters_table=parameters_table,
+                       log_table=log_file_data[[i]],
+                       plot_description=paste(plot_description, paste(terra_time_data[[i]], collapse="\n"),sep="\n\n"))
   }
   return(list(bgen_files_size=bgen_files_size,log_file_data=log_file_data,terra_time_data=terra_time_data))
 }
